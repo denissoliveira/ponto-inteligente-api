@@ -13,7 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.pi.api.entities.Lancamento;
 
+//Roda somente consulta, melhora o desempenho
 @Transactional(readOnly = true)
+
+//O spring quando não faz por convenção, usa-se namedquery
 @NamedQueries({
 		@NamedQuery(name = "LancamentoRepository.findByFuncionarioId", 
 				query = "SELECT lanc FROM Lancamento lanc WHERE lanc.funcionario.id = :funcionarioId") })

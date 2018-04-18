@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.pi.api.entities.Funcionario;
 
-@Transactional(readOnly = true) //esta fora para que todos os metodos sejam transacional
+@Transactional(readOnly = true) //esta fora para que todos os metodos sejam transacional, Roda somente consulta, melhora o desempenho
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
 
 	Funcionario findByCpf(String cpf);

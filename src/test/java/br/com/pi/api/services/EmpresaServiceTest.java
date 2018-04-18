@@ -24,7 +24,7 @@ import br.com.pi.api.repositories.EmpresaRepository;
 @ActiveProfiles("test")
 public class EmpresaServiceTest {
 
-	@MockBean
+	@MockBean //objetos falços para testes
 	private EmpresaRepository empresaRepository;
 
 	@Autowired

@@ -13,6 +13,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import br.com.pi.api.entities.Empresa;
 
+/*
+ * Para Criar as classes test, é necessário que tenha o mesmo nome de classe e pacote do main
+ * e adicionar Test no nome das classes de testee
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles("test")
