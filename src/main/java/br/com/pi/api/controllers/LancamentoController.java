@@ -66,14 +66,16 @@ public class LancamentoController {
 	@GetMapping(value = "/funcionario/{funcionarioId}")
 	public ResponseEntity<Response<Page<LancamentoDto>>> listarPorFuncionarioId(
 			@PathVariable("funcionarioId") Long funcionarioId,
-			@RequestParam(value = "pag", defaultValue = "0") int pag,
-			@RequestParam(value = "ord", defaultValue = "id") String ord,
-			@RequestParam(value = "dir", defaultValue = "DESC") String dir) {
+			@RequestParam(value = "pag", defaultValue = "0") int pag, //qual pagina
+			@RequestParam(value = "ord", defaultValue = "id") String ord, //ordenar por id
+			@RequestParam(value = "dir", defaultValue = "DESC") String dir) { //ordenar do maior para o menor
 		log.info("Buscando lançamentos por ID do funcionário: {}, página: {}", funcionarioId, pag);
-		Response<Page<LancamentoDto>> response = new Response<Page<LancamentoDto>>();
+		Response<Page<LancamentoDto>> response = new Response<Page<LancamentoDto>>();// tem quer ser um page pq é paginado
 
-		PageRequest pageRequest = new PageRequest(pag, this.qtdPorPagina, Direction.valueOf(dir), ord);
+		PageRequest pageRequest = new PageRequest(pag, this.qtdPorPagina, Direction.valueOf(dir), ord);//autoexplica
 		Page<Lancamento> lancamentos = this.lancamentoService.buscarPorFuncionarioId(funcionarioId, pageRequest);
+		
+		//faz o mapeamento, converte cada DTO
 		Page<LancamentoDto> lancamentosDto = lancamentos.map(lancamento -> this.converterLancamentoDto(lancamento));
 
 		response.setData(lancamentosDto);
@@ -245,6 +247,7 @@ public class LancamentoController {
 		lancamento.setLocalizacao(lancamentoDto.getLocalizacao());
 		lancamento.setData(this.dateFormat.parse(lancamentoDto.getData()));
 
+		//valida um enum, caso não seja tipo enum ele retorna erro
 		if (EnumUtils.isValidEnum(TipoEnum.class, lancamentoDto.getTipo())) {
 			lancamento.setTipo(TipoEnum.valueOf(lancamentoDto.getTipo()));
 		} else {

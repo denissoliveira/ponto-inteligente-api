@@ -7,7 +7,10 @@ import br.com.pi.api.entities.Empresa;
 
 public interface EmpresaRepository extends JpaRepository<Empresa, Long> {
 
-	//Roda somente consulta, melhora o desempenho
+	/*
+	 * definida para tal, assim o acesso é mais rápido, uma vez que não existirá
+	 * a​ ​ necessidade​ ​ de​ ​ nenhum​ ​ tipo​ ​ de​ ​ lock​ ​ no​ ​ banco
+	 */
 	@Transactional(readOnly = true)
 	Empresa findByCnpj(String cnpj);
 	

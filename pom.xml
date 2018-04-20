@@ -74,6 +74,13 @@
 			<artifactId>spring-security-test</artifactId>
 		</dependency>
 		
+		<!-- JWT Token -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.7.0</version>
+		</dependency>
+		
 		<!--  Hibernate validator -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

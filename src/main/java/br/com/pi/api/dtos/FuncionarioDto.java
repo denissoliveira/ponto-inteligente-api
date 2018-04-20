@@ -8,10 +8,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class FuncionarioDto {
 	
+	//não tem o cpf pq este não muda
 	private Long id;
 	private String nome;
 	private String email;
-	private Optional<String> senha = Optional.empty();
+	private Optional<String> senha = Optional.empty(); //opcional, muda se exitir 
 	private Optional<String> valorHora = Optional.empty();
 	private Optional<String> qtdHorasTrabalhoDia = Optional.empty();
 	private Optional<String> qtdHorasAlmoco = Optional.empty();

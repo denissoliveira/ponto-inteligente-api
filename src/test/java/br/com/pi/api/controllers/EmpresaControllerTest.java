@@ -42,7 +42,7 @@ public class EmpresaControllerTest {
 	private static final String RAZAO_SOCIAL = "Empresa XYZ";
 
 	@Test
-	@WithMockUser
+	@WithMockUser //cira um usuário padrão falso pra pode ser feito os testes
 	public void testBuscarEmpresaCnpjInvalido() throws Exception {
 		BDDMockito.given(this.empresaService.buscarPorCnpj(Mockito.anyString())).willReturn(Optional.empty());
 		//teste  web, retorna uma empresa invalida

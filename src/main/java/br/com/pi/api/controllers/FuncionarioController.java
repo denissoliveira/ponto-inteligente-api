@@ -47,7 +47,7 @@ public class FuncionarioController {
 	 * @return ResponseEntity<Response<FuncionarioDto>>
 	 * @throws NoSuchAlgorithmException
 	 */
-	@PutMapping(value = "/{id}")
+	@PutMapping(value = "/{id}")//usa-se put para atualização
 	public ResponseEntity<Response<FuncionarioDto>> atualizar(@PathVariable("id") Long id,
 			@Valid @RequestBody FuncionarioDto funcionarioDto, BindingResult result) throws NoSuchAlgorithmException {
 		log.info("Atualizando funcionário: {}", funcionarioDto.toString());
@@ -84,12 +84,14 @@ public class FuncionarioController {
 			throws NoSuchAlgorithmException {
 		funcionario.setNome(funcionarioDto.getNome());
 
+		//se diferente o email então altera, mas antes verifica se este email existe
 		if (!funcionario.getEmail().equals(funcionarioDto.getEmail())) {
 			this.funcionarioService.buscarPorEmail(funcionarioDto.getEmail())
 					.ifPresent(func -> result.addError(new ObjectError("email", "Email já existente.")));
 			funcionario.setEmail(funcionarioDto.getEmail());
 		}
 
+		//os demais ele altera caso exista
 		funcionario.setQtdHorasAlmoco(null);
 		funcionarioDto.getQtdHorasAlmoco()
 				.ifPresent(qtdHorasAlmoco -> funcionario.setQtdHorasAlmoco(Float.valueOf(qtdHorasAlmoco)));
