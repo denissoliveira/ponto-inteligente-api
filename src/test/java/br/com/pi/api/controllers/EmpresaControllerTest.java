@@ -26,7 +26,7 @@ import br.com.pi.api.services.EmpresaService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc //testes no contexto WEB
 @ActiveProfiles("test")
 public class EmpresaControllerTest {
 
@@ -45,25 +45,26 @@ public class EmpresaControllerTest {
 	@WithMockUser
 	public void testBuscarEmpresaCnpjInvalido() throws Exception {
 		BDDMockito.given(this.empresaService.buscarPorCnpj(Mockito.anyString())).willReturn(Optional.empty());
-
+		//teste  web, retorna uma empresa invalida
 		mvc.perform(MockMvcRequestBuilders.get(BUSCAR_EMPRESA_CNPJ_URL + CNPJ).accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isBadRequest())
-				.andExpect(jsonPath("$.errors").value("Empresa não encontrada para o CNPJ " + CNPJ));
+				.andExpect(status().isBadRequest()) //retorna um status 400 erro
+				.andExpect(jsonPath("$.errors").value("Empresa não encontrada para o CNPJ " + CNPJ));//permite manipular o json
 	}
 
 	@Test
 	@WithMockUser
 	public void testBuscarEmpresaCnpjValido() throws Exception {
+		//passa uma string qualquer e retona uma empresa gerada pelo metodo
 		BDDMockito.given(this.empresaService.buscarPorCnpj(Mockito.anyString()))
 				.willReturn(Optional.of(this.obterDadosEmpresa()));
 
 		mvc.perform(MockMvcRequestBuilders.get(BUSCAR_EMPRESA_CNPJ_URL + CNPJ)
 				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk())
+				.andExpect(status().isOk()) // retorna status ok do request
 				.andExpect(jsonPath("$.data.id").value(ID))
 				.andExpect(jsonPath("$.data.razaoSocial", equalTo(RAZAO_SOCIAL)))
 				.andExpect(jsonPath("$.data.cnpj", equalTo(CNPJ)))
-				.andExpect(jsonPath("$.errors").isEmpty());
+				.andExpect(jsonPath("$.errors").isEmpty());//retorna vazio
 	}
 
 	private Empresa obterDadosEmpresa() {

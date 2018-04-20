@@ -15,7 +15,7 @@ public class CadastroPFDto {
 	private String email;
 	private String senha;
 	private String cpf;
-	private Optional<String> valorHora = Optional.empty();
+	private Optional<String> valorHora = Optional.empty();//não é obrigtorio por isso inicia vazio
 	private Optional<String> qtdHorasTrabalhoDia = Optional.empty();
 	private Optional<String> qtdHorasAlmoco = Optional.empty();
 	private String cnpj;

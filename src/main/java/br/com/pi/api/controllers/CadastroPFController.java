@@ -27,9 +27,9 @@ import br.com.pi.api.services.EmpresaService;
 import br.com.pi.api.services.FuncionarioService;
 import br.com.pi.api.utils.PasswordUtils;
 
-@RestController
-@RequestMapping("/api/cadastrar-pf")
-@CrossOrigin(origins = "*")
+@RestController //end point
+@RequestMapping("/api/cadastrar-pf") //mapeamento da requisição, local de acesso
+@CrossOrigin(origins = "*")// aceite de requisição, esta para aceitar qualquer urls
 public class CadastroPFController {
 
 	private static final Logger log = LoggerFactory.getLogger(CadastroPFController.class);
@@ -51,9 +51,9 @@ public class CadastroPFController {
 	 * @return ResponseEntity<Response<CadastroPFDto>>
 	 * @throws NoSuchAlgorithmException
 	 */
-	@PostMapping
+	@PostMapping //para ser gravar - o @valid valida as  anotaçoes do DTO e @RequestBody converte o DTO
 	public ResponseEntity<Response<CadastroPFDto>> cadastrar(@Valid @RequestBody CadastroPFDto cadastroPFDto,
-			BindingResult result) throws NoSuchAlgorithmException {
+			BindingResult result) throws NoSuchAlgorithmException { //exception geração de senha
 		log.info("Cadastrando PF: {}", cadastroPFDto.toString());
 		Response<CadastroPFDto> response = new Response<CadastroPFDto>();
 

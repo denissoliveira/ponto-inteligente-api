@@ -24,16 +24,19 @@ import br.com.pi.api.repositories.EmpresaRepository;
 @ActiveProfiles("test")
 public class EmpresaServiceTest {
 
-	@MockBean //objetos falços para testes
+	@MockBean //objetos falços para testes, como passou nos testes pode ser falso pode ser usado
 	private EmpresaRepository empresaRepository;
 
-	@Autowired
+	@Autowired //objeto a ser testado
 	private EmpresaService empresaService;
 
 	private static final String CNPJ = "51463645000100";
 
 	@Before
 	public void setUp() throws Exception {
+		/*
+		 * ao usar o metodo, passa um moquito(qualquer string), e retorna um new empresa
+		 */
 		BDDMockito.given(this.empresaRepository.findByCnpj(Mockito.anyString())).willReturn(new Empresa());
 		BDDMockito.given(this.empresaRepository.save(Mockito.any(Empresa.class))).willReturn(new Empresa());
 	}

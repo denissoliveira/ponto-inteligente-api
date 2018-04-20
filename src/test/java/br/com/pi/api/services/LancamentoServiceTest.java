@@ -34,7 +34,7 @@ public class LancamentoServiceTest {
 	@Autowired
 	private LancamentoService lancamentoService;
 
-	@Before
+	@Before// não precisa testar remover pq ele retorna void
 	public void setUp() throws Exception {
 		BDDMockito
 				.given(this.lancamentoRepository.findByFuncionarioId(Mockito.anyLong(), Mockito.any(PageRequest.class)))
