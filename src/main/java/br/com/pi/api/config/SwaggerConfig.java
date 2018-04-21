@@ -37,13 +37,14 @@ public class SwaggerConfig {
 				.apiInfo(apiInfo());
 	}
 
+	//somente para info
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder().title("Ponto Inteligente API")
 				.description("Documentação da API de acesso aos endpoints do Ponto Inteligente.").version("1.0")
 				.build();
 	}
 
-	@Bean
+	@Bean //autentica manualmente para poder usar o swagger , já cria o token
 	public SecurityConfiguration security() {
 		String token;
 		try {
